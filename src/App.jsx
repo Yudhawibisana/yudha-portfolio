@@ -387,7 +387,7 @@ function App() {
           </div>
 
           <div className="intro-bottom">
-            <span>Berdomisili di Indonesia</span>
+            <span>Berdomisili di Jakarta Pusat</span>
 
             <span className="availability">
               <span className="status-dot" />
