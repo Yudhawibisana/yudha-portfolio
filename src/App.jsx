@@ -1,7 +1,32 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import profileImg from './assets/Ydha_foto.png'
 import './App.css'
+
+// Reveal wrapper component
+function Reveal({ children, className = '', delay = 0 }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => el.classList.add('visible'), delay)
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [delay])
+  return (
+    <div ref={ref} className={`reveal ${className}`}>
+      {children}
+    </div>
+  )
+}
 
 const navItems = [
   ['about', 'Tentang Saya'],
@@ -460,90 +485,99 @@ function App() {
         </section>
 
         <section id="skills" className="block">
-          <div className="section-heading">
-            <span>01 / KEMAMPUAN</span>
-            <h2>Keahlian</h2>
-          </div>
+          <Reveal>
+            <div className="section-heading">
+              <span>01 / KEMAMPUAN</span>
+              <h2>Keahlian</h2>
+            </div>
+          </Reveal>
 
           <div className="skill-groups">
-            {skillGroups.map((group) => (
-              <article className="skill-group" key={group.title}>
-                <div className="skill-group-heading">
-                  <span className="skill-group-icon">{group.icon}</span>
-                  <div>
-                    <h3>{group.title}</h3>
-                    <p>{group.subtitle}</p>
-                  </div>
-                </div>
-
-                <div className="skill-pills">
-                  {group.items.map((skill) => (
-                    <div className="skill-pill" key={skill.name}>
-                      <span className="skill-pill-bullet" />
-                      <span className="skill-pill-name">{skill.name}</span>
+            {skillGroups.map((group, i) => (
+              <Reveal key={group.title} delay={i * 100}>
+                <article className="skill-group">
+                  <div className="skill-group-heading">
+                    <span className="skill-group-icon">{group.icon}</span>
+                    <div>
+                      <h3>{group.title}</h3>
+                      <p>{group.subtitle}</p>
                     </div>
-                  ))}
-                </div>
-              </article>
+                  </div>
+
+                  <div className="skill-pills">
+                    {group.items.map((skill) => (
+                      <div className="skill-pill" key={skill.name}>
+                        <span className="skill-pill-bullet" />
+                        <span className="skill-pill-name">{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         </section>
 
         <section id="projects" className="block">
-          <div className="section-heading">
-            <span>02 / HASIL KARYA</span>
-            <h2>Proyek</h2>
-          </div>
+          <Reveal>
+            <div className="section-heading">
+              <span>02 / HASIL KARYA</span>
+              <h2>Proyek</h2>
+            </div>
+          </Reveal>
 
           <div className="project-list">
-            {projects.map((project) => (
-              <article className="project-card" key={project.number}>
-                <div className="project-number">{project.number}</div>
+            {projects.map((project, i) => (
+              <Reveal key={project.number} delay={i * 80}>
+                <article className="project-card">
+                  <div className="project-number">{project.number}</div>
 
-                <div className="project-content">
-                  <p className="project-type">{project.type}</p>
-                  <h3>{project.title}</h3>
+                  <div className="project-content">
+                    <p className="project-type">{project.type}</p>
+                    <h3>{project.title}</h3>
 
-                  <p className="project-description">
-                    {project.description}
-                  </p>
+                    <p className="project-description">
+                      {project.description}
+                    </p>
 
-                  <ul className="tags">
-                    {project.tech.map((tech) => (
-                      <li key={tech}>{tech}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
+                    <ul className="tags">
+                      {project.tech.map((tech) => (
+                        <li key={tech}>{tech}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         </section>
 
         <section id="experience" className="block">
-          <div className="section-heading">
-            <span>03 / RIWAYAT KEGIATAN</span>
-            <h2>Pengalaman</h2>
-          </div>
+          <Reveal>
+            <div className="section-heading">
+              <span>03 / RIWAYAT KEGIATAN</span>
+              <h2>Pengalaman</h2>
+            </div>
+          </Reveal>
 
           <div className="experience-list">
-            {experiences.map((experience) => (
-              <article
-                className="experience-item"
-                key={experience.company}
-              >
-                <div className="experience-period">
-                  {experience.period}
-                </div>
+            {experiences.map((experience, i) => (
+              <Reveal key={experience.company} delay={i * 100}>
+                <article className="experience-item">
+                  <div className="experience-period">
+                    {experience.period}
+                  </div>
 
-                <div>
-                  <h3>{experience.role}</h3>
-                  <p className="company">{experience.company}</p>
+                  <div>
+                    <h3>{experience.role}</h3>
+                    <p className="company">{experience.company}</p>
 
-                  <p className="experience-description">
-                    {experience.description}
-                  </p>
-                </div>
-              </article>
+                    <p className="experience-description">
+                      {experience.description}
+                    </p>
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -580,53 +614,54 @@ function App() {
         </section>
 
         <section id="certificates" className="block">
-          <div className="section-heading">
-            <span>05 / SERTIFIKASI</span>
-            <h2>Sertifikat</h2>
-          </div>
+          <Reveal>
+            <div className="section-heading">
+              <span>05 / SERTIFIKASI</span>
+              <h2>Sertifikat</h2>
+            </div>
+          </Reveal>
 
           <div className="certificate-list">
-            {certificates.map((certificate) => (
-              <article
-                className="certificate-card"
-                key={certificate.title}
-              >
-                <div className="certificate-icon">
-                  {certificate.logo ? (
-                    <img
-                      src={certificate.logo}
-                      alt="Logo Universitas Mercu Buana"
-                    />
-                  ) : (
-                    <span>{certificate.icon}</span>
-                  )}
-                </div>
-
-                <div className="certificate-content">
-                  <h3>{certificate.title}</h3>
-                  <p>{certificate.issuer}</p>
-                  <span>{certificate.description}</span>
-
-                  <div className="certificate-actions">
-                    <a
-                      href={certificate.file}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="certificate-button"
-                    >
-                      <span>Lihat Sertifikat ↗</span>
-                    </a>
-
-                    <a
-                      href={certificate.file}
-                      download
-                      className="certificate-download"
-                    >
-                      <span>↓ Unduh</span>
-                    </a>
+            {certificates.map((certificate, i) => (
+              <Reveal key={certificate.title} delay={i * 70}>
+                <article className="certificate-card">
+                  <div className="certificate-icon">
+                    {certificate.logo ? (
+                      <img
+                        src={certificate.logo}
+                        alt="Logo Universitas Mercu Buana"
+                      />
+                    ) : (
+                      <span>{certificate.icon}</span>
+                    )}
                   </div>
-                </div>
-              </article>
+
+                  <div className="certificate-content">
+                    <h3>{certificate.title}</h3>
+                    <p>{certificate.issuer}</p>
+                    <span>{certificate.description}</span>
+
+                    <div className="certificate-actions">
+                      <a
+                        href={certificate.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="certificate-button"
+                      >
+                        <span>Lihat Sertifikat ↗</span>
+                      </a>
+
+                      <a
+                        href={certificate.file}
+                        download
+                        className="certificate-download"
+                      >
+                        <span>↓ Unduh</span>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         </section>
