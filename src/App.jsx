@@ -359,7 +359,7 @@ function App() {
       <header className="floating-header">
         <nav className="floating-nav" aria-label="Navigasi utama">
           <a href="about" className="nav-brand">
-            Y
+            <img src={profileImg} alt="Yudha Wibisana" className="nav-brand-photo" />
           </a>
 
           <div className="nav-links">
