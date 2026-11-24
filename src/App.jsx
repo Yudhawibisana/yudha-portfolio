@@ -180,7 +180,7 @@ const socialLinks = [
   },
   {
     name: 'WhatsApp',
-    url: 'https://wa.me/6288809069308',
+    url: 'https://wa.me/6285899557426',
     className: 'whatsapp',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
