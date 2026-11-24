@@ -696,8 +696,8 @@ section[id] {
 
 .experience-item {
   display: grid;
-  grid-template-columns: 140px minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 28px;
   padding: 26px 0;
   border-bottom: 1px solid var(--line);
   background: transparent;
@@ -705,7 +705,7 @@ section[id] {
 }
 
 .experience-item:hover {
-  gap: 28px;
+  gap: 32px;
 }
 
 .experience-item:last-child {
@@ -713,16 +713,19 @@ section[id] {
 }
 
 .experience-period {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--accent);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border: 1px solid rgba(99, 102, 241, 0.15);
   border-radius: 8px;
   background: rgba(99, 102, 241, 0.05);
+  width: fit-content;
   white-space: nowrap;
 }
 
@@ -1214,6 +1217,11 @@ section[id] {
 
   .floating-nav {
     gap: 10px;
+  }
+
+  .experience-item {
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 20px;
   }
 }
 
