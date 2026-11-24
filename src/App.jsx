@@ -457,15 +457,14 @@ function App() {
                   </div>
                 </div>
 
-                <ul className="skill-list">
+                <div className="skill-pills">
                   {group.items.map((skill) => (
-                    <li key={skill.name}>
-                      <span className="skill-name">{skill.name}</span>
-                      <span className="leader" />
-                      <span className="level">{skill.level}</span>
-                    </li>
+                    <div className="skill-pill" key={skill.name}>
+                      <span className="skill-pill-bullet" />
+                      <span className="skill-pill-name">{skill.name}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </article>
             ))}
           </div>
