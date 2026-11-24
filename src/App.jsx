@@ -29,34 +29,53 @@ const skillGroups = [
   {
     title: 'Pengembangan Web',
     subtitle: 'Pengembangan aplikasi dan website',
-    icon: '⌘',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
     items: [
       { name: 'Laravel' },
-      { name: 'PHP'},
-      { name: 'JavaScript'},
-      { name: 'React.js'},
-      { name: 'Python'},
+      { name: 'PHP' },
+      { name: 'JavaScript' },
+      { name: 'React.js' },
+      { name: 'Python' },
     ],
   },
   {
     title: 'Database & Tools',
     subtitle: 'Pengelolaan data dan alat pengembangan',
-    icon: '⌘',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+      </svg>
+    ),
     items: [
-      { name: 'MySQL'},
-      { name: 'Git'},
+      { name: 'MySQL' },
+      { name: 'Git' },
     ],
   },
   {
     title: 'Dukungan TI & Jaringan',
     subtitle: 'Pemeliharaan perangkat dan infrastruktur',
-    icon: '⌘',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="16" y="16" width="6" height="6" rx="1" />
+        <rect x="2" y="16" width="6" height="6" rx="1" />
+        <rect x="9" y="2" width="6" height="6" rx="1" />
+        <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
+        <path d="M12 12V8" />
+      </svg>
+    ),
     items: [
-      { name: 'Troubleshooting Perangkat'},
-      { name: 'Instalasi Windows'},
-      { name: 'Jaringan Komputer'},
-      { name: 'Konfigurasi CCTV & NVR'},
-      { name: 'Perakitan & Upgrade Hardware'},
+      { name: 'Troubleshooting Perangkat' },
+      { name: 'Instalasi Windows' },
+      { name: 'Jaringan Komputer' },
+      { name: 'Konfigurasi CCTV & NVR' },
+      { name: 'Perakitan & Upgrade Hardware' },
     ],
   },
 ]
