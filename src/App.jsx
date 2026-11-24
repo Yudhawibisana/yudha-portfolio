@@ -203,7 +203,7 @@ const certificates = [
     issuer: 'Data Camp',
     description: 'Pengenalan dasar kecerdasan buatan (Artificial Intelligence), konsep, dan penerapannya.',
     logo: '/certificates/datacamp.png',
-    file: '/certificates/AiFundamentals.pdf',
+    file: '/certificates/AiFundamentals-Yudha.pdf',
   },
 ]
 
@@ -230,7 +230,22 @@ function SocialLinks() {
 function App() {
   const [activeSection, setActiveSection] = useState('about')
 
+  const navigateTo = (id) => {
+    window.history.pushState('', '', `/${id}`)
+    setActiveSection(id)
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+
   useEffect(() => {
+    // Handle initial load dengan path (misal /about) tanpa #
+    const path = window.location.pathname.replace('/', '')
+    if (path && navItems.some(([secId]) => secId === path)) {
+      setActiveSection(path)
+      const el = document.getElementById(path)
+      if (el) el.scrollIntoView()
+    }
+
     const sections = document.querySelectorAll('main section[id]')
 
     const observer = new IntersectionObserver(
@@ -256,11 +271,18 @@ function App() {
     return () => observer.disconnect()
   }, [])
 
+  // Sync URL pathname saat activeSection berubah dari scroll
+  useEffect(() => {
+    if (window.location.pathname !== `/${activeSection}`) {
+      window.history.replaceState('', '', `/${activeSection}`)
+    }
+  }, [activeSection])
+
   return (
     <div className="page">
       <header className="floating-header">
         <nav className="floating-nav" aria-label="Navigasi utama">
-          <a href="#about" className="nav-brand">
+          <a href="about" className="nav-brand">
             Y
           </a>
 
@@ -268,7 +290,11 @@ function App() {
             {navItems.map(([id, label]) => (
               <a
                 key={id}
-                href={`#${id}`}
+                href={`/${id}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  navigateTo(id)
+                }}
                 className={activeSection === id ? 'active' : ''}
               >
                 {label}
@@ -334,7 +360,7 @@ function App() {
               <SocialLinks />
 
               <div className="intro-actions">
-                <a href="#projects" className="secondary-link">
+                <a href="projects" className="secondary-link">
                   Lihat Proyek Saya ↓
                 </a>
               </div>
@@ -546,7 +572,6 @@ function App() {
 
         <footer className="footer">
           <p>© {new Date().getFullYear()} Yudha Wibisana</p>
-          <p>Dibuat menggunakan React.js</p>
         </footer>
       </main>
     </div>
