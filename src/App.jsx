@@ -230,11 +230,24 @@ function SocialLinks() {
 function App() {
   const [activeSection, setActiveSection] = useState('about')
 
+  const scrollToSection = (id, smooth = true) => {
+    const el = document.getElementById(id)
+    if (el) {
+      const headerOffset = window.innerWidth <= 700 ? 75 : 105
+      const elementPosition = el.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: smooth ? 'smooth' : 'auto',
+      })
+    }
+  }
+
   const navigateTo = (id) => {
     window.history.pushState('', '', `/${id}`)
     setActiveSection(id)
-    const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    scrollToSection(id, true)
   }
 
   useEffect(() => {
@@ -242,8 +255,9 @@ function App() {
     const path = window.location.pathname.replace('/', '')
     if (path && navItems.some(([secId]) => secId === path)) {
       setActiveSection(path)
-      const el = document.getElementById(path)
-      if (el) el.scrollIntoView()
+      setTimeout(() => {
+        scrollToSection(path, false)
+      }, 120)
     }
 
     const sections = document.querySelectorAll('main section[id]')
@@ -262,7 +276,7 @@ function App() {
         }
       },
       {
-        rootMargin: '-20% 0px -60% 0px',
+        rootMargin: '-100px 0px -50% 0px',
       }
     )
 
