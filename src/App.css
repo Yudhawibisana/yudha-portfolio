@@ -862,41 +862,48 @@ section[id] {
 .certificate-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 13px;
+  gap: 14px;
 }
 
 .certificate-card {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  gap: 22px;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--line);
-  background: transparent;
-  transition: gap 0.3s ease;
-}
-
-.certificate-card:last-child {
-  border-bottom: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .certificate-card:hover {
-  gap: 28px;
+  transform: translateY(-3px);
+  border-color: #c4ccf8;
+  box-shadow: var(--shadow-md);
 }
 
 .certificate-icon {
-  width: 56px;
-  height: 56px;
-  min-width: 56px;
-  display: grid;
-  place-items: center;
-  background: var(--accent-soft);
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #e8eaf0;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .certificate-icon img {
-  width: 36px;
-  height: 36px;
+  width: 100%;
+  height: 100%;
+  padding: 9px;
   object-fit: contain;
   display: block;
 }
@@ -909,24 +916,51 @@ section[id] {
 .certificate-content h3 {
   margin: 0 0 5px 0;
   font-family: var(--heading);
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--ink);
 }
 
 .certificate-content p {
   margin: 0 0 4px 0;
   color: var(--ink);
-  font-size: 0.84rem;
+  font-size: 0.85rem;
   font-weight: 500;
 }
 
 .certificate-content > span {
+  display: block;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.79rem;
 }
 
+.certificate-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
 
+.certificate-button,
+.certificate-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
 
 .certificate-button {
   border-color: #2563eb;
@@ -953,6 +987,7 @@ section[id] {
   transform: translateY(-2px);
   border-color: var(--accent);
   color: var(--accent);
+  background: var(--accent-soft);
 }
 
 /* ========================================
